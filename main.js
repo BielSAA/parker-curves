@@ -4,6 +4,9 @@ window.addEventListener("load", () => {
 
     let turntables = new Array();
 
+    turntables.push(new Turntable(new Vector2(400, 100)));
+    turntables.push(new Turntable(new Vector2(100, 400)));
+
     function drawFrame() {
         /* Changing canvas size, if needed */
         if(canvas.width != window.innerWidth || canvas.height != window.innerHeight){
