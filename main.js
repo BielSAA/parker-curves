@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
 
         for(i = 0; i < turntables.length; i++)
             for(j = i + 1; j < turntables.length; j++)
-                parkerPoints = parkerPoints.concat(turntables[i].drawParkerPoints(turntables[j], ctx)).slice(1450 - 950*turntables.length);
+                parkerPoints = parkerPoints.concat(turntables[i].drawParkerPoints(turntables[j], ctx)).slice(725 - 475*turntables.length);
         
         ctx.save();
 

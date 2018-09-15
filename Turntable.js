@@ -93,7 +93,7 @@ class Turntable {
         
         return [
             new Vector2(x0, y0),
-            new Vector2(x1, y1)
+            // new Vector2(x1, y1) // Uncomment this to see both possible drawings
         ];
     }
 
