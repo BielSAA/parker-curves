@@ -53,7 +53,7 @@ class Turntable {
         ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.TAU);
         ctx.fill();
 
-        return; // Comment this to see the possibility circles
+        return ctx.restore(); // Comment this to see the possibility circles
         /* Drawing possibility circle */
         ctx.strokeStyle = "#C10202";
         ctx.lineWidth = 2;
