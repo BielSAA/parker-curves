@@ -9,11 +9,12 @@ class Turntable {
      * @param {(Number|undefined)} frequency Radians rotated every frame
      * @param {(Number|undefined)} startingAngle Angle to start on
      */
-    constructor(pos, radius, frequency, startingAngle) {
+    constructor(pos, radius, frequency, startingAngle, stickSize) {
         this.pos = pos || new Vector2();
         this.size = radius || 50;
         this.rotation = startingAngle || 0; // Radians
         this.frequency = frequency || 0.03; // Radians / frame (60 fps on most screens)
+        this.stickSize = stickSize || 300;
     }
 
     /**
@@ -51,6 +52,16 @@ class Turntable {
         ctx.beginPath();
         ctx.arc(knobPos.x, knobPos.y, 5, 0, Math.TAU);
         ctx.fill();
+
+        /* Drawing possibility circle */
+        ctx.strokeStyle = "#C10202";
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+        ctx.setLineDash([10, 30]);
+
+        ctx.beginPath();
+        ctx.arc(knobPos.x, knobPos.y, this.stickSize, 0, Math.TAU);
+        ctx.stroke();
 
         ctx.restore();
     }
