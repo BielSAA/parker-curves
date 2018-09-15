@@ -53,12 +53,13 @@ class Turntable {
         ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.TAU);
         ctx.fill();
 
-        return; // Uncomment this to see the possibility circles
+        return; // Comment this to see the possibility circles
         /* Drawing possibility circle */
         ctx.strokeStyle = "#C10202";
         ctx.lineWidth = 2;
         ctx.lineCap = "round";
         ctx.setLineDash([10, 30]);
+        let knobPos = this.knobPos;
 
         ctx.beginPath();
         ctx.arc(knobPos.x, knobPos.y, this.stickSize, 0, Math.TAU);

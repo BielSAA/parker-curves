@@ -4,10 +4,11 @@ window.addEventListener("load", () => {
              ctx = canvas.getContext("2d");
 
     let turntables = new Array();
-    turntables.push(new Turntable(new Vector2(400, 100), null, 0.03));
-    turntables.push(new Turntable(new Vector2(100, 400), null, 0.09));
+    //                                        x    y  radius speed  angle stickSize
+    turntables.push(new Turntable(new Vector2(400, 100), 50, 0.03,   0,   300));
+    turntables.push(new Turntable(new Vector2(100, 400), 50, 0.09,   0,   300));
     // Uncomment below for crazyness
-    // turntables.push(new Turntable(new Vector2(400, 400), null, 0.06));
+    // turntables.push(new Turntable(new Vector2(400, 400), 50, 0.06,   0,   300));
 
     let parkerPoints = new Array();
 
