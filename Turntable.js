@@ -53,15 +53,7 @@ class Turntable {
         ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.TAU);
         ctx.fill();
 
-        /* Drawing the knob */
-        ctx.fillStyle = "#C10202";
-
-        let knobPos = this.knobPos;
-
-        ctx.beginPath();
-        ctx.arc(knobPos.x, knobPos.y, 5, 0, Math.TAU);
-        ctx.fill();
-
+        return; // Uncomment this to see the possibility circles
         /* Drawing possibility circle */
         ctx.strokeStyle = "#C10202";
         ctx.lineWidth = 2;
@@ -73,5 +65,63 @@ class Turntable {
         ctx.stroke();
 
         ctx.restore();
+    }
+    
+    /**
+     * Returns parker points
+     * 
+     * @param {Turntable} target Turntable to intersect sticks
+     * @returns {Array<Vector2>} Parker points
+     */
+    getParkerPoints(target) {
+        let p0 = this.knobPos,
+            p1 = target.knobPos;
+        
+        let d, a, h;
+
+        d = p0.clone().sub(p1).mag;
+        a = (this.stickSize*this.stickSize + d*d - target.stickSize*target.stickSize)/(2*d);
+        h = Math.sqrt(this.stickSize * this.stickSize - a*a);
+
+        let p2 = p1.clone().sub(p0).scale(a/d).add(p0);
+
+        let x0 = p2.x + h*(p1.y - p0.y)/d,
+            y0 = p2.y - h*(p1.x - p0.x)/d,
+            x1 = p2.x - h*(p1.y - p0.y)/d,
+            y1 = p2.y + h*(p1.x - p0.x)/d;
+        
+        return [
+            new Vector2(x0, y0),
+            new Vector2(x1, y1)
+        ];
+    }
+
+    /**
+     * Draws and returns parker points
+     * 
+     * @param {Turntable} target Turntable to intersect sticks
+     * @returns {Array<Vector2>} Parker points
+     */
+    drawParkerPoints(target, ctx) {
+        let points = this.getParkerPoints(target),
+            k0 = this.knobPos,
+            k1 = target.knobPos;
+
+        ctx.save();
+        ctx.strokeStyle = "#C10202";
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        points.forEach(p => {
+            ctx.beginPath();
+            ctx.moveTo(k0.x, k0.y);
+            ctx.lineTo(p.x, p.y);
+            ctx.lineTo(k1.x, k1.y);
+            ctx.stroke();
+        });
+
+        ctx.restore();
+        return points;
     }
 }

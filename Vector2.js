@@ -45,4 +45,35 @@ class Vector2 {
 
         return this;
     }
+
+    /**
+     * Subtracts `vec` to `this`
+     * 
+     * @param {Vector2} vec Vector to subtract
+     * @returns {Vector2} Returns itself
+     */
+    sub(vec) {
+        this.x -= vec.x;
+        this.y -= vec.y;
+
+        return this;
+    }
+    
+    /**
+     * Returns the magnitude squared of `this`
+     * 
+     * @returns {Number} Magnitude squared of `this`
+     */
+    get magSq() {
+        return this.x * this.x + this.y * this.y;
+    }
+    
+    /**
+     * Returns the magnitude of `this`
+     * 
+     * @returns {Number} Magnitude of `this`
+     */
+    get mag() {
+        return Math.sqrt(this.magSq);
+    }
 }
