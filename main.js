@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
     let turntables = new Array();
 
     turntables.push(new Turntable(new Vector2(400, 100)));
-    turntables.push(new Turntable(new Vector2(100, 400)));
+    turntables.push(new Turntable(new Vector2(100, 400), null, 0.06));
 
     function drawFrame() {
         /* Changing canvas size, if needed */
@@ -13,6 +13,9 @@ window.addEventListener("load", () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
+
+        /* Updating turntables */
+        turntables.forEach(t => t.update());
         
         /* Clearing canvas */
         ctx.fillStyle = "#420000";

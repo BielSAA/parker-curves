@@ -6,10 +6,24 @@ class Turntable {
      * @constructor
      * @param {(Vector2|undefined)} pos Position of the turntable
      * @param {(Number|undefined)} radius Radius of the turntable
+     * @param {(Number|undefined)} frequency Radians rotated every frame
+     * @param {(Number|undefined)} startingAngle Angle to start on
      */
-    constructor(pos, radius) {
+    constructor(pos, radius, frequency, startingAngle) {
         this.pos = pos || new Vector2();
         this.size = radius || 50;
+        this.rotation = startingAngle || 0; // Radians
+        this.frequency = frequency || 0.03; // Radians / frame (60 fps on most screens)
+    }
+
+    /**
+     * Updates the turntable
+     */
+    update() {
+        this.rotation += this.frequency;
+
+        while(this.rotation >= Math.TAU)
+            this.rotation -= Math.TAU;
     }
 
     /**
@@ -20,10 +34,22 @@ class Turntable {
     draw(ctx) {
         ctx.save();
 
+        /* Drawing the turntable itself */
         ctx.fillStyle = "#730000";
 
         ctx.beginPath();
         ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.TAU);
+        ctx.fill();
+
+        /* Drawing the knob */
+        ctx.fillStyle = "#C10202";
+
+        let knobPos = new Vector2(Math.cos(this.rotation), Math.sin(this.rotation))
+                .scale(this.size - 10)
+                .add(this.pos);
+
+        ctx.beginPath();
+        ctx.arc(knobPos.x, knobPos.y, 5, 0, Math.TAU);
         ctx.fill();
 
         ctx.restore();

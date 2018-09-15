@@ -19,4 +19,30 @@ class Vector2 {
     clone() {
         return new Vector2(this.x, this.y);
     }
+
+    /**
+     * Scales `this`
+     * 
+     * @param {Number} factor Keeps direction but makes it `factor` times bigger
+     * @returns {Vector2} Returns itself
+     */
+    scale(factor) {
+        this.x *= factor;
+        this.y *= factor;
+
+        return this;
+    }
+
+    /**
+     * Adds `vec` to `this`
+     * 
+     * @param {Vector2} vec Vector to add
+     * @returns {Vector2} Returns itself
+     */
+    add(vec) {
+        this.x += vec.x;
+        this.y += vec.y;
+
+        return this;
+    }
 }
