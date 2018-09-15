@@ -16,6 +16,17 @@ class Turntable {
         this.frequency = frequency || 0.03; // Radians / frame (60 fps on most screens)
         this.stickSize = stickSize || 300;
     }
+    
+    /**
+     * Returns knobPosition
+     * 
+     * @returns {Vector2}
+     */
+    get knobPos() {
+        return new Vector2(Math.cos(this.rotation), Math.sin(this.rotation))
+                .scale(this.size - 10)
+                .add(this.pos);
+    }
 
     /**
      * Updates the turntable
@@ -45,9 +56,7 @@ class Turntable {
         /* Drawing the knob */
         ctx.fillStyle = "#C10202";
 
-        let knobPos = new Vector2(Math.cos(this.rotation), Math.sin(this.rotation))
-                .scale(this.size - 10)
-                .add(this.pos);
+        let knobPos = this.knobPos;
 
         ctx.beginPath();
         ctx.arc(knobPos.x, knobPos.y, 5, 0, Math.TAU);
