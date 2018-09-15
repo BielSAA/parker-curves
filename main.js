@@ -4,8 +4,10 @@ window.addEventListener("load", () => {
              ctx = canvas.getContext("2d");
 
     let turntables = new Array();
-    turntables.push(new Turntable(new Vector2(400, 100)));
-    turntables.push(new Turntable(new Vector2(100, 400), null, 0.06));
+    turntables.push(new Turntable(new Vector2(400, 100), null, 0.03));
+    turntables.push(new Turntable(new Vector2(100, 400), null, 0.09));
+    // Uncomment below for crazyness
+    // turntables.push(new Turntable(new Vector2(400, 400), null, 0.06));
 
     let parkerPoints = new Array();
 
@@ -14,7 +16,19 @@ window.addEventListener("load", () => {
 
         for(i = 0; i < turntables.length; i++)
             for(j = i + 1; j < turntables.length; j++)
-                turntables[i].drawParkerPoints(turntables[j], ctx);
+                parkerPoints = parkerPoints.concat(turntables[i].drawParkerPoints(turntables[j], ctx)).slice(1450 - 950*turntables.length);
+        
+        ctx.save();
+
+        parkerPoints.forEach((p, n) => {
+            let t = n/parkerPoints.length;
+            ctx.fillStyle = `rgba(240, 49, 7, ${1 - (1 - t)*(1 - t)})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.TAU);
+            ctx.fill();
+        });
+
+        ctx.restore();
     }
 
     function drawFrame() {
